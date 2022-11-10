@@ -1,0 +1,103 @@
+package Queue.real;
+//고정 길이 큐 //링버퍼
+public class IntQueue {
+    private int[] que;//큐용 배열
+    private int capacity; //큐의 용량
+    private int front; //맨 앞의 요소 커서
+    //인큐하는 데이터 가운데 맨 앞 요소의 인덱스를 저장하는 필드
+    private int rear; //맨 뒤의 요소 커서
+    //인큐한 데이터 가운데 맨 뒤에 넣은 요소 하나 뒤 인덱스를 저장하는 필드
+    private int size; //현재 데이터 개수
+    //front값과 rear값이 같을때 빈건지,가득찬건지 구별하기 위해
+
+    //실행 시 예외:큐가 비어 있음
+    public class EmptyIntQueueException extends RuntimeException{
+        public EmptyIntQueueException(){}
+    }
+    //실행 시 예외:큐가 가득 참
+    public class OverflowIntQueueException extends RuntimeException{
+        public OverflowIntQueueException(){}
+    }
+    //생성자
+    public IntQueue(int maxlen){
+        size =front=rear=0;
+        capacity =maxlen;
+        try{
+            que= new int[capacity]; //큐 본체용 배열을 생성
+        }catch (OutOfMemoryError e) {//생성할 수 없음
+            capacity=0;
+        }
+    }
+    public int enque(int x) throws  OverflowIntQueueException{
+        if(size >=capacity)
+            throw new OverflowIntQueueException(); //큐가 가득참
+        que[rear++] =x;   // 큐에 데이터 저장 후 rear만 1증가
+        size++; //용량 1 추가
+        if(rear==capacity)
+            rear=0;  //꽉찼는데 하나 더추가하면 ,rear가 처음으로 가게
+        return x;
+    }
+    public int deque() throws EmptyIntQueueException{
+        if(size <=0)
+            throw new EmptyIntQueueException();
+        int x = que[front++]; // front 인덱스의 큐 데이터를 지우려면 front 커서를 1증가
+        size--;//용량 1 줄이기
+        if(front==capacity)
+            front=0;//용량이 10인데  인덱스10에 데이터가 유일하게 남아있었을때,이거 지우면 다시 인덱스0으로 가게함
+        return  x;
+    }
+    //큐에서 데이터를 피크(프런트 데이터를 들여다봄)
+    public  int peek() throws  EmptyIntQueueException{
+        if(size <=0) throw  new EmptyIntQueueException(); //큐가 비어 있음
+        return  que[front];
+    }
+    //큐를 비움
+    public void clear() {
+        size =front=rear=0;
+    }
+    //큐의 용량을 반환
+    public int getCapacity(){
+        return capacity;
+    }
+    //큐에 쌓여 있는 데이터 개수를 반환
+    public int size() {
+        return size;
+    }
+    //큐가 비어 있나요?
+    public boolean isEmpty(){
+        return size<=0;
+    }
+    //큐가 가득 찼나요?
+    public boolean isFull(){
+        return size>=capacity;
+    }
+    //큐 안의 모든 데이터를 front->rear 순서로 출력
+    public String toString(){
+        String str="[";
+        if(size <=0) System.out.println("큐가 비어 있습니다.");
+        else{
+            for(int i=0;i<size;i++){
+                str+=que[(i+front) % capacity];
+                if(i!=size-1)
+                    str+=",";
+            }
+        }
+        return str+"]";
+    }
+
+    public static void main(String[] args) {
+        IntQueue intQueue=new IntQueue(10);
+        intQueue.enque(10);
+        intQueue.enque(20);
+        intQueue.enque(30);
+        intQueue.enque(40);
+        intQueue.enque(50);
+        System.out.println(intQueue);
+        intQueue.deque();
+        intQueue.deque();
+        System.out.println(intQueue);
+
+
+    }
+
+}
