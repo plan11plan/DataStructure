@@ -1,0 +1,22 @@
+package Recursion;
+
+public class Fibonacci {
+    public static int Fibonacci(int index){
+
+    if(index<3){ return 1;}
+        else{
+            //피보나치 수열은 앞의 두항의 합이 현재의 항의 값이 되는 
+            return Fibonacci(index-1)+Fibonacci(index-2);
+        }
+    }
+
+
+    public static void main(String[] args) {
+        System.out.println(Fibonacci(1)); //1
+        System.out.println(Fibonacci(2)); //1
+        System.out.println(Fibonacci(3)); //2
+        System.out.println(Fibonacci(4)); //3
+        System.out.println(Fibonacci(5)); //5
+
+    }
+}
