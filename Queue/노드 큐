@@ -1,0 +1,104 @@
+package Queue;
+
+class Queue {
+    Node front;
+    Node rear;
+    private  int size=0;
+    private class Node{
+        private Object data;
+        private Node next;
+        Node(Object input){
+            this.data=input;
+            this.next=null;
+
+        }
+    }
+    public int size(){
+        return size;
+    }
+    Node node(int index){
+        Node x= front;
+        for(int i=0;i<index;i++){
+            x=x.next;
+        }
+        return x;
+    }
+    public boolean isEmpty(){
+        return size<=0;
+    }
+
+    public void push(Object input){
+        if(isEmpty()){
+            Node newNode =new Node(input);
+            newNode.next=rear;
+            front=newNode;
+            rear=newNode;
+            size++;
+        }
+        else{
+//            Node temp1=node(size-1);
+//            Node temp2=temp1.next;
+//            Node newNode =new Node(input);
+//            temp1.next=newNode;
+//            newNode.next=temp2;
+//            size++;
+//            if(newNode.next==null){
+//                rear=newNode;
+//            }
+
+        }
+    }
+    public Object pop(){
+        if(size==0){
+            return null;
+        }
+        else{
+            Object returnData = front.data;
+            front=front.next;
+            size--;
+            return  returnData;
+        }
+    }
+    public String toString(){
+        String str="[";
+        Node node =front;
+        for(int i=0;i<size-1;i++){
+            str+=node.data;
+            node=node.next;
+            str+=",";
+        }
+        str+=rear.data;
+        return str+"]";
+    }
+    public Object peek(){
+        if(isEmpty()){
+            System.out.println("Queue is Empty");
+            return null;
+        }else{
+            return rear.data;
+        }
+    }
+}
+public class NodeQueue{
+    public static void main(String[] args) {
+        Queue queue=new Queue();
+        try {
+            queue.push(10);
+            queue.push(20);
+            queue.push(30);
+            queue.push(40);
+            queue.pop();
+
+            System.out.println( "peek :"+queue.peek());
+            System.out.println(queue);
+
+        }
+        catch (NullPointerException e) {
+            System.out.println("예외발생");
+        }
+
+
+
+    }
+}
+
