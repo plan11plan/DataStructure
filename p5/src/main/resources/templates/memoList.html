@@ -1,0 +1,21 @@
+<html xmlns:th="http://www.thymeleaf.com">
+<head>
+<meta charset="UTF-8">
+<title>메모 리스트</title>
+</head>
+<body style="background-color:rgb(255, 255, 128)">
+<div align="center">
+<h3> 나의 메모</h3>
+<table width="600" border="1">
+<tr> <th>제목 <th>내용 <th>작성일시 
+<tr th:each="m:${list}"> 
+<td th:text="${m.title}" style="color:blue; font-weight:bold">title
+<td th:text="${m.memo}">memo
+<td th:text="${m.wdate}" style="color:grey">wdate
+</table><br>
+<a href="/memo">작성 화면으로 돌아가기</a>
+
+</div>
+
+</body>
+</html>

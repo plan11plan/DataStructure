@@ -1,0 +1,14 @@
+<html xmlns:th="http://www.thymeleaf.com">
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+<script th:inline="javascript">
+/*<![CDATA[*/
+  let msg = /*[[${msg}]]*/ 'default';
+  alert(msg);
+  location.href="/";
+ /*]]>*/
+</script>
+</body>
+</html>

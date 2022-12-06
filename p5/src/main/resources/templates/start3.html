@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" >
+<head><meta charset="UTF-8">
+</head>
+<body style="background-color:pink">
+<form method="get" action="/star/winner">
+  <div align="center">
+    <h2>Who is your favorite star?(결승)</h2>
+
+    <table width="600" border="1">
+      <tr>
+        <td><img th:src="|/${choice1}.jpg|" width="250" height="280" alt="아">
+        <td><img th:src="|/${choice2}.jpg|" width="250" height="280" alt="아">
+      <tr>
+        <th><input type="radio" name="winner" th:value="${choice1}">
+          <span th:text="${choice1}"></span>
+
+        <th><input type="radio" name="winner" th:value="${choice2}">
+          <span  th:text="${choice2}"></span><tr>
+
+    </table>
+
+    <button> 최종 선택</button>
+  </div>
+</form>
+</body>
+</html>

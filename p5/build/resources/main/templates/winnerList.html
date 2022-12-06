@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>투표 결과</title>
+</head>
+<body>
+   <h1>투표 결과</h1>
+   <table border="1" style = "margin-left: auto; margin-right: auto;">
+   <tr>
+      <th>이름 <th>준결승 진출 <th>결승 진출
+   <tr th:each="list:${list}">
+      <td th:text="${list.name}">
+      <td th:text="${list.COUNT_SEMI}">
+      <td th:text="${list.COUNT_FINAL}">
+   </table>
+   <div style="text-align:center">
+      <a href="/star/1">처음부터</a>
+      <form action="/winner/reset">
+         <input type="submit" value="초기화">
+      </form>
+   </div>
+</body>
+</html>
