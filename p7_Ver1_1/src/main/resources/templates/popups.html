@@ -1,0 +1,11 @@
+<body>
+<script th:inline="javascript">
+let msg = [[${msg}]];
+let url = [[${url}]];
+alert(msg);
+if(url == 'back')
+history.back();
+else
+location.href=url;
+</script>
+</body>
